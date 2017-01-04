@@ -1,0 +1,127 @@
+{
+	"config": {
+	  	"webapp": {
+			"title":"webApp",
+			"folder":"webapp"
+		},
+	  	"provider": {
+			"homee": {
+			  "id":"xxx",
+			  "webhookKey":"xxx",
+			  "username":"xxx",
+			  "password":"xxx"
+			},
+			"database": {
+			  "server":"xxx",
+			  "name":"xxx",
+			  "username":"xxx",
+			  "password":"xxx"
+			},
+			"fritzBox": {
+			  "host":"fritz.box",
+			  "password":"xxx"
+			},
+			"netatmo": {
+			  "client_id":"xxx",
+			  "client_secret":"xxx",
+			  "username":"xxx",
+			  "password":"xxx"
+			}
+		}
+	},
+	"floors": {
+		"EG": {
+			"rooms": {
+				"11":"Wohnzimmer",
+				"12":"Esszimmer",
+				"13":"Gang"
+			}
+		},
+		"OG": {
+		  "rooms": {
+			"21":"Kinderzimmer",
+			"22":"Galerie"
+		  }
+		},
+		"UG": {
+		  "rooms": {
+			"31":"Sauna"
+		  }
+		},
+		"Outdoor": {
+		  "rooms": {
+			"41":"Garten",
+			"42":"Garage"
+		  }
+		},
+	  	"Webcams": {
+		  "rooms": {
+			"51":"Allgemein"
+		  }
+	  }
+	},
+	"devices": {
+	  "Christbaum": {
+		  "active":"1",
+		  "type":"1",
+		  "category":"switch",
+		  "name":"Christbaum",
+		  "identifier":"Christbaum",
+		  "room":"11",
+		  "homeeWebHookEvents": {
+			  "on":"ChristbaumAn",
+			  "off":"ChristbaumAus"
+		  }
+	  },
+	  "door": {
+		"active":"1",
+		"type":"1",
+		"category":"button",
+		"buttonName":"öffnen",
+		"name":"Haustür",
+		"identifier":"maindoor",
+		"room":"13",
+		"homeeWebHookEvents": {
+		  "on":"Haust%C3%BCr"
+		}
+	  },
+	  "garage": {
+		"active":"1",
+		"type":"1",
+		"category":"button",
+		"buttonName":"öffnen",
+		"name":"Garage",
+		"identifier":"garage",
+		"room":"42",
+		"homeeWebHookEvents": {
+		  "on":"Garage"
+		}
+	  },
+	  "JalousieEG": {
+		"active":"1",
+		"type":"1",
+		"category":"shutter",
+		"name":"Jalousie EG",
+		"identifier":"socket_a",
+		"room":"12",
+		"homeeWebHookEvents": {
+		  "up":"RolloEgHoch",
+		  "stop":"RolloEgStop",
+		  "down":"RolloEgRunter"
+		}
+	  },
+	  "JalousieOG": {
+		"active":"1",
+		"type":"1",
+		"category":"shutter",
+		"name":"Jalousie EG",
+		"identifier":"socket_a",
+		"room":"22",
+		"homeeWebHookEvents": {
+		  "up":"RolloOGHoch",
+		  "stop":"RolloOGStop",
+		  "down":"RolloOGRunter"
+		}
+	  }
+	}
+}
