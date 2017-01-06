@@ -12,8 +12,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'edit') {
     $id = $_GET['id'];
 
     $postAction = 'update';
-    $result = mysql_query("SELECT * FROM rooms WHERE id = ".$id);
-    if($row = mysql_fetch_array($result)) {
+    $result = mysqlquery("SELECT * FROM rooms WHERE id = ".$id."  ORDER BY sortId ASC");
+    if($row = mysqlfetch($result)) {
         $prefill_name = $row['name'];
         $prefill_floorId = $row['floorId'];
         $prefill_id = $row['id'];
@@ -27,7 +27,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'edit') {
 if(isset($_GET['action']) && $_GET['action'] == 'delete') {
     $id = $_GET['id'];
     $sql = "DELETE FROM rooms WHERE id = ".$id."";
-    mysql_query($sql);
+    mysqlquery($sql);
 
     echo '<div class="alert alert-success">
     Zimmer wurde erfolgreich gelöscht!
@@ -52,7 +52,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'add') {
             '".$floorId."'
         )
     ";
-    mysql_query($sql);
+    mysqlquery($sql);
 
     echo '<div class="alert alert-success">
     Zimmer wurde erfolgreich erstellt!
@@ -66,7 +66,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'update') {
     $id = $_POST['id'];
     $sortid = $_POST['sortid'];
     $sql = "UPDATE rooms SET name = '".utf8_decode($name)."' , floorId = ".$floorId." , sortId = '".$sortid."' WHERE id = ".$id;
-    mysql_query($sql);
+    mysqlquery($sql);
     echo '<div class="alert alert-success">
     Zimmer wurde erfolgreich bearbeitet!
     </div>';
@@ -94,8 +94,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'update') {
                 <div class="col-sm-8">
                     <select class="form-control" name="floorId" id="floorId">
                         <?php
-                        $result = mysql_query("SELECT * FROM floors");
-                        while($row = mysql_fetch_array($result)) {
+                        $result = mysqlquery("SELECT * FROM floors");
+                        while($row = mysqlfetch($result)) {
 
                             $selected = '';
                             if($prefill_floorId == $row['id']) {
@@ -145,13 +145,13 @@ if(isset($_GET['action']) && $_GET['action'] == 'update') {
     </thead>
     <tbody>
     <?php
-    $result = mysql_query("SELECT * FROM rooms");
-    while($row = mysql_fetch_array($result))
+    $result = mysqlquery("SELECT * FROM rooms");
+    while($row = mysqlfetch($result))
     {
 
         $floorName = '';
-        $resultf = mysql_query("SELECT * FROM floors where id = ".$row['floorId']);
-        if($rowf = mysql_fetch_array($resultf)) {
+        $resultf = mysqlquery("SELECT * FROM floors where id = ".$row['floorId']);
+        if($rowf = mysqlfetch($resultf)) {
             $floorName = $rowf['name'];
         }
         echo '

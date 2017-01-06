@@ -19,8 +19,8 @@ $prefill_id = '';
 if(isset($_GET['action']) && $_GET['action'] == 'edit') {
     $id = $_GET['id'];
     $postAction = 'update';
-    $result = mysql_query("SELECT * FROM buttons WHERE id = ".$id);
-    if($row = mysql_fetch_array($result)) {
+    $result = mysqlquery("SELECT * FROM buttons WHERE id = ".$id);
+    if($row = mysqlfetch($result)) {
         $prefill_name = $row['name'];
         $prefill_roomId = $row['roomId'];
         $prefill_type = $row['type'];
@@ -42,7 +42,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'edit') {
 if(isset($_GET['action']) && $_GET['action'] == 'delete') {
     $buttonId = $_GET['id'];
     $sql = "DELETE FROM buttons WHERE id = ".$buttonId."";
-    mysql_query($sql);
+    mysqlquery($sql);
     echo '<div class="alert alert-success">
     Button wurde erfolgreich gelöscht!
     </div>';
@@ -92,7 +92,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'add') {
             '".$link."'
         )
     ";
-    mysql_query($sql);
+    mysqlquery($sql);
 
     echo '<div class="alert alert-success">
     Button wurde erfolgreich erstellt!
@@ -125,7 +125,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'update') {
       identifier = '".$identifier."',
       sortId = '".$sortid."'
       WHERE id = ".$id;
-    mysql_query($sql);
+    mysqlquery($sql);
     echo '<div class="alert alert-success">
     Button wurde erfolgreich bearbeitet!
     </div>';
@@ -247,12 +247,12 @@ $homeegrams = $Homee->getHomeeGrams();
                 <div class="col-sm-8">
                     <select class="form-control" name="room" id="room">
                         <?php
-                        $result = mysql_query("SELECT * FROM rooms");
-                        while($row = mysql_fetch_array($result)) {
+                        $result = mysqlquery("SELECT * FROM rooms");
+                        while($row = mysqlfetch($result)) {
 
                             $floorName = '';
-                            $resultf = mysql_query("SELECT * FROM floors where id = ".$row['floorId']);
-                            if($rowf = mysql_fetch_array($resultf)) {
+                            $resultf = mysqlquery("SELECT * FROM floors where id = ".$row['floorId']);
+                            if($rowf = mysqlfetch($resultf)) {
                                 $floorName = $rowf['name'];
                             }
 
@@ -414,8 +414,8 @@ $homeegrams = $Homee->getHomeeGrams();
     </thead>
     <tbody>
     <?php
-    $result = mysql_query("SELECT * FROM buttons");
-    while($row = mysql_fetch_array($result))
+    $result = mysqlquery("SELECT * FROM buttons ORDER BY sortId ASC");
+    while($row = mysqlfetch($result))
     {
         echo '
         <tr>

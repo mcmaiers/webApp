@@ -1,5 +1,6 @@
 <?php
 include "header.php";
+
 if(!isset($_SESSION['username'])) {
     include 'modules/login.php';
 } else {
@@ -39,5 +40,8 @@ if(!isset($_SESSION['username'])) {
     }
 
 }
+
+
+
 include "footer.php";
 ?>

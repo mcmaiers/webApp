@@ -2,8 +2,8 @@
 function getButtonTemplate($buttonIdentifier) {
 
     $template = '';
-    $result = mysql_query("SELECT * FROM buttons WHERE identifier = '".$buttonIdentifier."'");
-    if($row = mysql_fetch_array($result))
+    $result = mysqlquery("SELECT * FROM buttons WHERE identifier = '".$buttonIdentifier."'");
+    if($row = mysqlfetch($result))
     {
         switch ($row['type']) {
             case "1":
@@ -77,15 +77,15 @@ function getNavi() {
         $template = '
     <li><a href="index.php">Dashboard</a></li>
     ';
-        $result = mysql_query("SELECT * FROM floors  ORDER BY sortId ASC");
-        while($row = mysql_fetch_array($result)) {
+        $result = mysqlquery("SELECT * FROM floors  ORDER BY sortId ASC");
+        while($row = mysqlfetch($result)) {
             $template .= '<li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.$row['name'].'<span class="caret"></span></a>
         ';
-            $resultRooms = mysql_query("SELECT * FROM rooms WHERE floorId = ".$row['id']." ORDER BY sortId ASC");
+            $resultRooms = mysqlquery("SELECT * FROM rooms WHERE floorId = ".$row['id']." ORDER BY sortId ASC");
             if(!$resultRooms == false) {
                 $template .= '<ul class="dropdown-menu">';
-                while($rowRooms = mysql_fetch_array($resultRooms)) {
+                while($rowRooms = mysqlfetch($resultRooms)) {
                     $template .= '<li><a href="index.php?module=buttons&roomid='.$rowRooms['id'].'">'.$rowRooms['name'].'</a></li><li class="divider"></li>';
                 }
                 $template .= '</ul>';
@@ -101,4 +101,22 @@ function getNavi() {
     }
 }
 
+function mysqlquery($query) {
+    $mysqli = mysqli_connect(DB_SERVER,DB_USER,DB_PASSWD,DB_NAME);
+    $result=mysqli_query($mysqli,$query);
+    return $result;
+}
+
+function mysqlfetch($result) {
+    $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+    return $row;
+}
+
+function result($result,$i,$item){
+    return mysqli_free_result($result);
+}
+
+function num_rows($result){
+    return mysqli_num_rows($result);
+}
 ?>

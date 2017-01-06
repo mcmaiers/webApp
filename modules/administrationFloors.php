@@ -10,8 +10,8 @@ $prefill_id = '';
 if(isset($_GET['action']) && $_GET['action'] == 'edit') {
     $id = $_GET['id'];
     $postAction = 'update';
-    $result = mysql_query("SELECT * FROM floors WHERE id = ".$id);
-    if($row = mysql_fetch_array($result)) {
+    $result = mysqlquery("SELECT * FROM floors WHERE id = ".$id."  ORDER BY sortId ASC");
+    if($row = mysqlfetch($result)) {
         $prefill_name = $row['name'];
         $prefill_id = $row['id'];
         $prefill_sortid = $row['sortId'];
@@ -23,7 +23,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'edit') {
 if(isset($_GET['action']) && $_GET['action'] == 'delete') {
     $id = $_GET['id'];
     $sql = "DELETE FROM floors WHERE id = ".$id."";
-    mysql_query($sql);
+    mysqlquery($sql);
     echo '<div class="alert alert-success">
     Ebene wurde erfolgreich gelöscht!
     </div>';
@@ -32,7 +32,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'delete') {
 if(isset($_GET['action']) && $_GET['action'] == 'add') {
     $name = $_POST['name'];
     $sql = "INSERT INTO floors( name)VALUES('".utf8_decode($name)."')";
-    mysql_query($sql);
+    mysqlquery($sql);
     echo '<div class="alert alert-success">
     Ebene wurde erfolgreich erstellt!
     </div>';
@@ -43,7 +43,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'update') {
     $id = $_POST['id'];
     $sortid = $_POST['sortid'];
     $sql = "UPDATE floors SET name = '".utf8_decode($name)."' , sortId = '".$sortid."' WHERE id = ".$id;
-    mysql_query($sql);
+    mysqlquery($sql);
     echo '<div class="alert alert-success">
     Ebene wurde erfolgreich bearbeitet!
     </div>';
@@ -102,8 +102,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'update') {
     </thead>
     <tbody>
     <?php
-    $result = mysql_query("SELECT * FROM floors");
-    while($row = mysql_fetch_array($result))
+    $result = mysqlquery("SELECT * FROM floors");
+    while($row = mysqlfetch($result))
     {
         echo '
         <tr>

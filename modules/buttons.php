@@ -1,7 +1,7 @@
 <?php
 $roomid = $_GET['roomid'];
-$result = mysql_query("SELECT * FROM buttons WHERE roomId = ".$roomid." ORDER BY sortId ASC");
-while($row = mysql_fetch_array($result))
+$result = mysqlquery("SELECT * FROM buttons WHERE roomId = ".$roomid." ORDER BY sortId ASC");
+while($row = mysqlfetch($result))
 {
 
    echo '
