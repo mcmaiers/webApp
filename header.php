@@ -1,23 +1,22 @@
 <?php
+session_start();
 header("Content-Type: text/html; charset=utf-8");
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-include "config.php";
+include_once "config.php";
+include_once "lib/helper.php";
+include_once 'lib/homeeTypes.class.php';
+include_once 'lib/homee.class.php';
 ?><!DOCTYPE html>
 <html>
   <head>
-    <title><?php echo getConfig('config.webapp.title'); ?></title>
+    <title><?php echo APP_NAME; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	
-	<link rel="apple-touch-icon" href="/icon.png">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<link rel="icon" type="image/png" href="/icon.png" sizes=18x18>
-	<link rel="shortcut icon" href="/icon.ico">
-	<link rel="icon" type="image/png" href="/icon.png" sizes="32x32">
-	
-	
-	<link href="css/style.css" rel="stylesheet">
+	  <meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link rel="apple-touch-icon" href="assets/img/icon.png">
+	<link rel="shortcut icon" href="assets/img/icon.ico">
+	<link rel="icon" type="image/png" href="assets/img/icon.png" sizes="32x32">
+
+	<link href="assets/css/style.css" rel="stylesheet">
 	
 	<!-- Das neueste kompilierte und minimierte CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -32,8 +31,6 @@ include "config.php";
 	
   </head>
   <body>
-  
-
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -42,14 +39,14 @@ include "config.php";
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-              <a class="navbar-brand" href="index.php"><?php echo getConfig('config.webapp.title'); ?></a>
+              <a class="navbar-brand" href="index.php"><?php echo APP_NAME; ?></a>
             </div>
             
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
-					<?php
-						include "navigation.php";
-					?>
+				<?php
+				echo getNavi();
+				?>
 				</ul>
             </div><!-- /.navbar-collapse -->
         </nav>
